@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getUnsplashAxios } from "./service/unsplash";
+import axios from "axios"
 import Card from "./components/Card/Card";
 
 class App extends Component {
@@ -7,9 +7,15 @@ class App extends Component {
     resultList: []
   };
 
-  componentDidMount() {
-    getUnsplashAxios("Cars");
-    // this.setState({resultList : getUnsplashAxios("Cars")})
+  async componentDidMount() {
+    const searchTerm = "trees"
+    const response= await axios.get("https://api.unsplash.com/search/photos", {
+      params: {query: searchTerm},
+      headers: {
+        Authorization: `Client-ID ${process.env.REACT_APP_API_KEY}`
+      }
+    });
+    this.setState({resultList: response.data.results})
   }
 
   render() {
@@ -17,7 +23,7 @@ class App extends Component {
     return (
       <div className="container">
         {resultList.map(result => (
-          <Card imageUrl="" title="" />
+          <Card imageUrl={result.urls.small} title={result.description} />
         ))}
       </div>
     );
