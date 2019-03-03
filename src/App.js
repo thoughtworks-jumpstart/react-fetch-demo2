@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import unsplash from "./service/unsplash"
 import Card from "./components/Card/Card";
 
 class App extends Component {
@@ -8,11 +7,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const searchTerm = "trees"
-    const response= await unsplash.get("/search/photos", {
-      params: {query: searchTerm}
-    });
-    this.setState({resultList: response.data.results})
+   //fetch data from unsplash and set to state
   }
 
   render() {
