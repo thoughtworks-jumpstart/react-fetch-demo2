@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Card from "./components/Card/Card";
 
 class App extends Component {
@@ -9,17 +10,17 @@ class App extends Component {
   async componentDidMount() {
     try {
       const searchTerm = "trees";
-      const response = await fetch(
+      const response = await axios.get(
         `https://api.unsplash.com/search/photos?query=${searchTerm}`,
         {
-          headers: { 
+          headers: {
             Authorization: `Client-ID ${process.env.REACT_APP_API_KEY}`
           }
         }
       );
-      const data = await response.json();
-      this.setState({resultList: data.results})
 
+      const data = response.data;
+      this.setState({ resultList: data.results });
     } catch (err) {
       console.log(err);
     }
@@ -30,7 +31,11 @@ class App extends Component {
     return (
       <div className="container">
         {resultList.map(result => (
-          <Card key={result.id} imageUrl={result.urls.small} title={result.description} />
+          <Card
+            key={result.id}
+            imageUrl={result.urls.small}
+            title={result.description}
+          />
         ))}
       </div>
     );
