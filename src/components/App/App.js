@@ -10,9 +10,8 @@ class App extends Component {
   async componentDidMount() {
     try {
       const searchTerm = "flowers";
-      const response = await searchPhotos(searchTerm)
-      const results = response.data.results
-      this.setState({ resultList: results });
+      const data = await searchPhotos(searchTerm)
+      this.setState({ resultList: data.results });
     } catch (err) {
       console.log(err);
     }

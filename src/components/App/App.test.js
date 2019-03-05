@@ -14,7 +14,7 @@ jest.mock("../../services/unsplash", () => {
 
   return {
     searchPhotos: jest.fn(subject =>
-      Promise.resolve({ data: { results: sampleResult } })
+      Promise.resolve({ results: sampleResult })
     )
   };
 });
