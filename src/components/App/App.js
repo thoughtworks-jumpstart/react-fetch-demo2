@@ -11,6 +11,7 @@ class App extends Component {
     try {
       const searchTerm = "flowers";
       const response = await searchPhotos(searchTerm)
+      const results = response.data.results
       this.setState({ resultList: results });
     } catch (err) {
       console.log(err);
