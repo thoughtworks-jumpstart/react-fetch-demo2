@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { unsplash } from "./services/unsplash";
-import Card from "./components/Card/Card";
+import { searchPhotos } from "../../services/unsplash";
+import Card from "../Card/Card";
 
 class App extends Component {
   state = {
@@ -10,9 +10,8 @@ class App extends Component {
   async componentDidMount() {
     try {
       const searchTerm = "flowers";
-      const response = await unsplash.get(`/search/photos?query=${searchTerm}`);
-      const data = response.data;
-      this.setState({ resultList: data.results });
+      const response = await searchPhotos(searchTerm)
+      this.setState({ resultList: results });
     } catch (err) {
       console.log(err);
     }
