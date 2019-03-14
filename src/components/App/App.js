@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { searchPhotos } from "../../services/unsplash";
+import { searchPhotosAxios, searchPhotosFetch } from "../../services/unsplash";
 import Card from "../Card/Card";
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
   async componentDidMount() {
     try {
       const searchTerm = "flowers";
-      const data = await searchPhotos(searchTerm)
+      const data = await searchPhotosFetch(searchTerm);
       this.setState({ resultList: data.results });
     } catch (err) {
       console.log(err);
