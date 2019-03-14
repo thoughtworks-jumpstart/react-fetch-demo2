@@ -1,68 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React Fetch Demo 2
 
-## Available Scripts
+This repo contains a starter project for a code along to demonstrate how to search for images with the Unsplash API and rendering them with react
 
-In the project directory, you can run:
+## Learning Objectives
+- To learn how to use fetch and axios to get data from an external API
+- How to read API documentation 
+- How to store an API key and access the key in React 
+- How to pass the key to fetch and axios
+- How to extract fetching code to a service
+- How to test react components which call an external API by mocking
 
-### `npm start`
+## Lab Instructions
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Fork this repository to your github account and clone it to your computer
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The `master` branch contains the final solution for your reference after the lab.
 
-### `npm test`
+You should checkout to the `lab` branch do an `npm install` before starting this lab
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Get the API key for Unsplash
+1. Register at unsplash https://unsplash.com/developers for a free API key
+0. Browse the documentation and look for the
+  - base url
+  - The unsplash api that allows us to search for photos
+  - Instructions on how to use the API key
+0. Create a file named `.env.local` in the root of your project
+0. Save the API key inside as 
+```
+REACT_APP_API_KEY=placeYourSecretKeyHere
+```
+0. You can access the API Key with `process.env.REACT_APP_API_KEY` in App.js
 
-### `npm run build`
+### Use Fetch API get data from Unsplash API
+1. Add a `componentDidMount()` lifecycle method to App Component, write your fetch logic in this lifecycle hook
+0. Research the syntax for the `fetch` API. 
+0. Investigate how to pass in the API key through the query string
+0. Investigate how to pass the API key through the Authorization header
+0. Fetch data using `fetch` from the unsplash API based on a search term
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Use Axios to get data from Unsplash API
+1. Modify the code in `componentDidMount()` to use axios 
+0. Research the syntax for the `axios` API. 
+0. Investigate how to pass in the API key through the query string
+0. Investigate how to pass the API key through the Authorization header
+0. Fetch data using `axios` from the unsplash API based on a search term
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Extract axios code to a service
+1. Create a `services` folder in `src` folder
+0. Create a file `unsplash.js`  in the services folder, write your code here.
+0. Investigate how to use `axios.create` to create a preconfigured instance of axios that already contains the 
+  - baseURL
+  - Authorization header with the API key
+0. Create a new function in `unsplash.js` called `searchPhotosAxios()` and use the preconfigured instance to get data from unsplash
+0. export the function and use it in App.js `componentDidMount()`     
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Demo: Testing a component which has async fetch
+1. Together we will  an asynchronous test to mock fetch or axios when testing your component 
+0. Create a file App.test.js and write an async test that uses `jest.mock()` and `wait()` from react-testing-library
